@@ -11,10 +11,21 @@ namespace TestDrive
     {
         public string Nome { get; set; }
         public decimal Preco { get; set; } 
+        public string PrecoFormatado{
+            get{
+                return string.Format("R$ {0}", Preco);
+            }
+        }
     }
 
     public partial class MainPage : ContentPage
     {
+        void listViewVeiculos_ItemTapped(object sender, Xamarin.Forms.ItemTappedEventArgs e)
+        {
+            var veiculo = (Veiculo)e.Item;
+            DisplayAlert("Test Drive", string.Format("Você tocou no modelo '{0}', que custa {1}", veiculo.Nome, veiculo.PrecoFormatado),"Ok");
+        }
+
         public List<Veiculo> Veiculos { get; set; }
 
         public MainPage()
